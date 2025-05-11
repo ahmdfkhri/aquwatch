@@ -5,14 +5,15 @@ DART_OUT_DIR = mobile/lib/src/generated
 
 proto-go:
 	@echo "Generating Go protobuf files..."
-	cd backend && make gen
+	protoc --go_out ./backend/gen --go-grpc_out ./backend/gen protos/*.proto
 
 proto-dart:
 	@echo "Generating Dart protobuf files..."
 	@mkdir -p $(DART_OUT_DIR)
-	protoc --dart_out=grpc:$(DART_OUT_DIR) \
-	       -Iprotos \
-	       $(PROTO_FILES)
+	protoc --dart_out=grpc:mobile/lib/src/generated \
+       -Iprotos \
+       protos/*.proto \
+			 google/protobuf/timestamp.proto
 
 proto-all: proto-go proto-dart
 
