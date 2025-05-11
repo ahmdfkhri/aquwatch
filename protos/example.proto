@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package example;
+option go_package = "github.com/yourusername/your-project/backend/gen;gen";
+
+service ExampleService {
+  rpc GetExample (ExampleRequest) returns (ExampleResponse) {}
+}
+
+message ExampleRequest {
+  string query = 1;
+}
+
+message ExampleResponse {
+  string result = 1;
+}
